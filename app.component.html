@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <form [formGroup]="form" (ngSubmit)="generateNumber()">
+    <div class="d-flex flex-row justify-content-between mb-3">
+      <label for="endingNumber">Favorite Number</label>
+      <input
+        id="endingNumber"
+        type="number"
+        formControlName="endingNumber"
+        required
+        min="0"
+        max="9"
+        maxlength="1" 
+        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 1)"
+      />
+    </div>
+    <div class="d-flex flex-row justify-content-between">
+      <label for="numberLength">Number Length</label>
+      <input
+        id="numberLength"
+        type="number"
+        formControlName="numberLength"
+        required
+        min="0"
+      />
+    </div>
+    <div class="d-flex flex-row justify-content-center">
+      <button type="submit" [disabled]="form.invalid">Submit</button>
+    </div>
+  </form>
+  <div *ngIf="generatedNumber" class="result mt-4">
+    <h2>Your Number is:</h2>
+    <p class="truncate-text" title="{{generatedNumber}}">{{ generatedNumber }}</p>
+  </div>
+</div>
